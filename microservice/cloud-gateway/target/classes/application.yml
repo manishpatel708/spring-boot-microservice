@@ -1,0 +1,13 @@
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: COLLEGE-SERVICE
+          uri: http://localhost:9001/
+          predicates:
+            - Path=/college/**
+        - id: DEPARTMENT-SERVICE
+          uri: http://localhost:9002/
+          predicates:
+            - Path=/department/**
