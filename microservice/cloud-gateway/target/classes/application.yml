@@ -7,7 +7,32 @@ spring:
           uri: http://localhost:9001/
           predicates:
             - Path=/college/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: COLLEGE-SERVICE
+                fallbackUri: forward:/collegeServiceFallBack
         - id: DEPARTMENT-SERVICE
           uri: http://localhost:9002/
           predicates:
             - Path=/department/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: DEPARTMENT-SERVICE
+                fallbackUri: forward:/departmentServiceFallBack
+
+hystrix:
+  command:
+    fallbackcmd:
+      excution:
+        isolation:
+          thred:
+            timeoutInMilliseconds: 4000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+

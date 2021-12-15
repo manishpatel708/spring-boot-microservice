@@ -34,5 +34,5 @@ management:
   endpoints:
     web:
       exposure:
-        include: hystrex.stream
+        include: "*"
 
